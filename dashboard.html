@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>নতুন পোস্ট তৈরি করুন</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+</head>
+<body class="centered">
+  <div class="card">
+    <h2>➕ নতুন পোস্ট তৈরি করুন</h2>
+    <input type="text" id="title" placeholder="শিরোনাম">
+    <textarea id="details" placeholder="বিস্তারিত লিখুন"></textarea>
+    <input type="text" id="category" placeholder="ক্যাটেগরি">
+    <button onclick="createPost()">📢 পোস্ট করুন</button>
+  </div>
+  <script>
+    function createPost() {
+      const title = document.getElementById('title').value;
+      const details = document.getElementById('details').value;
+      const category = document.getElementById('category').value;
+
+      if (title && details && category) {
+        const post = { title, details, category };
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        posts.push(post);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        alert("✅ পোস্ট সংরক্ষণ হয়েছে!");
+        document.getElementById('title').value = "";
+        document.getElementById('details').value = "";
+        document.getElementById('category').value = "";
+      } else {
+        alert("⚠️ দয়া করে সব ঘর পূরণ করুন।");
+      }
+    }
+  </script>
+</body>
+</html>
